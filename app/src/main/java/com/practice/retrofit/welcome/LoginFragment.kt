@@ -1,13 +1,16 @@
 package com.practice.retrofit.welcome
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.button.MaterialButton
 import com.google.android.material.textview.MaterialTextView
 import com.practice.retrofit.R
+import com.practice.retrofit.dashboard.DashboardActivity
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -47,6 +50,16 @@ class LoginFragment : Fragment() {
         return view
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        view.findViewById<MaterialButton>(R.id.btn_login).setOnClickListener {
+            val intent = Intent(activity, DashboardActivity::class.java)
+            activity?.let {
+                it.startActivity(intent)
+                it.finish()
+            }
+        }
+    }
 
     companion object {
         /**
