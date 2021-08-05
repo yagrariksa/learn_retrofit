@@ -50,14 +50,7 @@
             <com.google.android.material.textview.MaterialTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="simple app"
-                android:textAlignment="center"
-                android:textAppearance="@style/text_body" />
-
-            <com.google.android.material.textview.MaterialTextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="for learning"
+                android:text="simple app for learning"
                 android:textAlignment="center"
                 android:textAppearance="@style/text_body" />
 
