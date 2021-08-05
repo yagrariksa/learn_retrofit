@@ -23,42 +23,38 @@
             app:layout_constraintVertical_bias="0.3" />
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/edt_username"
+            android:id="@+id/inputLayout_email"
+            style="@style/my_input_layout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="24dp"
             android:layout_marginVertical="16dp"
-            android:hint="@string/text_username"
-            android:textAppearance="@style/text_form_field"
-            app:expandedHintEnabled="false"
-            app:hintTextAppearance="@style/text_form_label"
-            app:hintTextColor="@color/text_secondary"
+            android:hint="@string/text_email"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edt_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/edt_password"
+            android:id="@+id/inputLayout_password"
+            style="@style/my_input_layout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="24dp"
             android:layout_marginVertical="16dp"
             android:hint="@string/text_password"
-            android:textAppearance="@style/text_form_field"
             app:endIconMode="password_toggle"
-            app:expandedHintEnabled="false"
-            app:hintTextAppearance="@style/text_form_label"
-            app:hintTextColor="@color/text_secondary"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/edt_username">
+            app:layout_constraintTop_toBottomOf="@+id/inputLayout_email">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edt_password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textPassword" />
@@ -72,9 +68,33 @@
             android:layout_marginVertical="16dp"
             android:text="@string/dummy_login_text"
             android:textAppearance="@style/text_button"
+            android:visibility="visible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/edt_password" />
+            app:layout_constraintTop_toBottomOf="@+id/inputLayout_password" />
+
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:indeterminate="true"
+            app:layout_constraintBottom_toBottomOf="@id/btn_login"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/btn_login" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_main_error"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Something wrong"
+            android:textAppearance="@style/text_error"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btn_login" />
+
 
         <LinearLayout
             android:layout_width="wrap_content"

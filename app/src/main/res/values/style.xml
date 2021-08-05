@@ -81,4 +81,16 @@
         <item name="android:textColor">@color/text_red</item>
     </style>
 
+    <style name="my_input_layout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="boxStrokeColor">@color/green_500</item>
+        <item name="boxStrokeErrorColor">@color/text_red</item>
+        <item name="errorEnabled">true</item>
+        <item name="helperTextEnabled">true</item>
+        <item name="helperTextTextAppearance">@style/text_error</item>
+        <item name="helperTextTextColor">@color/text_red</item>
+        <item name="hintTextAppearance">@style/text_form_label</item>
+        <item name="hintTextColor">@color/text_secondary</item>
+        <item name="android:textAppearance">@style/text_form_field</item>
+    </style>
+
 </resources>

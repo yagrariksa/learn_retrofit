@@ -7,6 +7,7 @@
     <string name="dummy_login_text">LOGIN</string>
     <string name="dummy_register_text">REGISTER</string>
     <string name="text_welcome">WELCOME</string>
-    <string name="text_username">Username</string>
+    <string name="text_email">Email</string>
     <string name="text_password">Password</string>
+    <string name="text_dashboard">Dashboard</string>
 </resources>
