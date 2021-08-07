@@ -1,11 +1,13 @@
-package com.practice.retrofit.welcome
+package com.practice.retrofit.dashboard
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.google.gson.Gson
 import com.practice.retrofit.model.Account
 import com.practice.retrofit.model.DefaultResponse
+import com.practice.retrofit.model.Store
 import com.practice.retrofit.network.ApiFactory
 import com.practice.retrofit.network.RequestState
 import com.practice.retrofit.network.Result
@@ -14,14 +16,13 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
-class LoginViewModel : ViewModel() {
-
+class StoreViewModel : ViewModel() {
     private val _state = MutableLiveData<RequestState>()
     val state: LiveData<RequestState>
         get() = _state
 
-    private val _response = MutableLiveData<DefaultResponse<Account>>()
-    val response: LiveData<DefaultResponse<Account>>
+    private val _response = MutableLiveData<DefaultResponse<List<Store>>>()
+    val response: LiveData<DefaultResponse<List<Store>>>
         get() = _response
 
     private val _error = MutableLiveData<String>()
@@ -31,11 +32,11 @@ class LoginViewModel : ViewModel() {
     private var job = Job()
     private val uiScope = CoroutineScope(job + Dispatchers.Main)
 
-    fun doLogin(email: String? = null, password: String? = null) {
+    fun getData() {
         _state.postValue(RequestState.REQUEST_START)
         uiScope.launch {
             try {
-                when (val response = ApiFactory.login(email, password)) {
+                when (val response = ApiFactory.allStore()) {
                     is Result.Success -> {
                         _state.postValue(RequestState.REQUEST_END)
                         _response.postValue(response.data)
@@ -46,10 +47,44 @@ class LoginViewModel : ViewModel() {
                             Gson().fromJson(
                                 response.exception,
                                 DefaultResponse::class.java
-                            ) as DefaultResponse<Account>
+                            ) as DefaultResponse<List<Store>>
                         )
                     }
                 }
+
+            } catch (t: Throwable) {
+                _state.postValue(RequestState.REQUEST_ERROR)
+                _error.postValue(t.localizedMessage)
+            }
+        }
+    }
+
+    fun findStore(
+        startlat: String? = null,
+        endlat: String? = null,
+        startlong: String? = null,
+        endlong: String? = null
+    ) {
+        _state.postValue(RequestState.REQUEST_START)
+        uiScope.launch {
+            try {
+                when (val response = ApiFactory.findStore(startlat, endlat, startlong, endlong)) {
+                    is Result.Success -> {
+                        _state.postValue(RequestState.REQUEST_END)
+                        _response.postValue(response.data)
+                    }
+                    is Result.Error -> {
+                        Log.e("RESPONSE ERROR", response.exception)
+                        _state.postValue(RequestState.REQUEST_ERROR)
+                        _response.postValue(
+                            Gson().fromJson(
+                                response.exception,
+                                DefaultResponse::class.java
+                            ) as DefaultResponse<List<Store>>
+                        )
+                    }
+                }
+
             } catch (t: Throwable) {
                 _state.postValue(RequestState.REQUEST_ERROR)
                 _error.postValue(t.localizedMessage)
@@ -59,6 +94,5 @@ class LoginViewModel : ViewModel() {
 
     override fun onCleared() {
         super.onCleared()
-        job.cancel()
     }
 }
