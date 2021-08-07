@@ -3,6 +3,7 @@ package com.practice.retrofit.network
 import android.util.Log
 import com.practice.retrofit.model.Account
 import com.practice.retrofit.model.DefaultResponse
+import com.practice.retrofit.model.Store
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Response
@@ -52,9 +53,31 @@ object ApiFactory {
     }
 
     /* Login Function */
-    suspend fun login(email: String? = null, password: String? = null): Result<DefaultResponse<Account>> {
-        return safeApiCall { apiService.login(
-            email, password
-        ) }
+    suspend fun login(
+        email: String? = null,
+        password: String? = null
+    ): Result<DefaultResponse<Account>> {
+        return safeApiCall {
+            apiService.login(
+                email, password
+            )
+        }
     }
+
+    /* find all store */
+    suspend fun allStore(): Result<DefaultResponse<List<Store>>> {
+        return safeApiCall { apiService.allStore() }
+    }
+
+    /* find store with location */
+    suspend fun findStore(
+        startlat: String? = null,
+        endlat: String? = null,
+        startlong: String? = null,
+        endlong: String? = null
+    ): Result<DefaultResponse<List<Store>>> {
+        return safeApiCall { apiService.findStore(startlat, endlat, startlong, endlong) }
+    }
+
+
 }

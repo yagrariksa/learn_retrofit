@@ -5,16 +5,97 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/green_200"
+    android:padding="16dp"
     tools:context=".dashboard.DashboardActivity">
 
     <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tv_dashboard"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/text_dashboard"
         android:textAppearance="@style/text_page_title"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_store"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/tv_dashboard"
+        app:layout_constraintTop_toBottomOf="@id/tv_dashboard"
+        tools:listitem="@layout/item_store" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btn_show_modal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_baseline_search_24"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/modal"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/modal"
+        android:orientation="vertical"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Search"
+            android:textAlignment="center"
+            android:textAppearance="@style/text_modal_title" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/inputLayout_startlat"
+            style="@style/my_input_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="8dp"
+            android:hint="Latitude Start">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edt_lat_start"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:inputType="numberDecimal" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/inputLayout_startlong"
+            style="@style/my_input_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="8dp"
+            android:hint="Longtitude Start">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edt_long_start"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:inputType="numberDecimal" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_cari"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Cari" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_modal_cancel"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Batal" />
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

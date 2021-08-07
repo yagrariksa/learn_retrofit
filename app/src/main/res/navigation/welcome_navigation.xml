@@ -14,6 +14,9 @@
             android:id="@+id/action_splashFragment_to_loginFragment"
             app:destination="@id/loginFragment"
             app:launchSingleTop="true"/>
+        <action
+            android:id="@+id/action_splashFragment_to_dashboardActivity"
+            app:destination="@id/dashboardActivity" />
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
